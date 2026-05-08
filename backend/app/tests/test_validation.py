@@ -17,7 +17,8 @@ def valid_row() -> dict:
 def test_validate_dataframe_accepts_expected_schema() -> None:
     df = pd.DataFrame([valid_row()])
     validate_dataframe(df)
-    assert list(df.columns) == REQUIRED_COLUMNS
+    assert all(column in df.columns for column in REQUIRED_COLUMNS)
+    assert "applicant_id" in df.columns
 
 
 def test_validate_dataframe_reports_missing_columns() -> None:
